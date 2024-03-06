@@ -2,59 +2,29 @@
 
 This was my final project for my MSc Data Science programme
 
-Abstract
+**_Task Description:_** Create a data science project with at least 800 lines of code and a 15,000 word report on a project of your choosing or from the list of suggested projects by supervisors. I decidedto conduct my own project and intitally wanted to look at increasing diversity in the outdoors, however I was unable to use the data in the end so decided to look at crime rates in London based on socio-economic factors instead. 
 
-Amidst increasing urbanisation and the connection between higher population
-densities and increased crime rates, it becomes imperative for governments to employ
-effective interventions to protect the people in its cities. To address the gap in
-previous literature, this project looked to assess the effectiveness of four open source
-socio-economic factors in predicting crime in London using data science techniques.
-Data analysis was conducted using statistical methods and visualisations in Python to
-identify spacio-temporal crime trends in London. Additionally, machine learning
-techniques were used to run regression models on the data, such as the Random Forest
-Regressor, to identify the effectiveness of using population density per square
-kilometer, median income, unemployment and the percentage of people earning under
-the London Living Wage in predicting overall crime in London. Crime rates in London
-were found to have strong spacio-temporal elements for both overall crime and
-individual major crime types such as theft and violence against the person. The
-socio-economic factors used to predict overall crime rates in London were all shown to
-influence London crime rates to some degree, particularly population density. This
-study provided a valuable foundation for understanding socio-economic factors that
-influence crime in London using machine learning, as well as yearly, monthly, and area 
-trends. Further research could look at the influence that other socio-economic factors 
-play on the crime rate in London and on specific crime types rather than overall crime.
+**_Goal:_** Utilise data analysis and machine learning techniques to:
+1. Identify the trends in overall crime between 2011 and 2021 in London and provide
+potential explanations.
+2. Identify the crimes types that most affected London between 2011 and 2021.
+3. Identify the monthly trends in the top 5 major crime types that affected London
+between 2011 and 2021.
+4. Identify the boroughs with the highest and lowest overall crime rates while taking
+into account population size.
+5. Investigate whether socio-economic factors such as unemployment rate
+(percentage), annual income (median), people earning below the London Living
+Wage (percentage) and population density by square kilometer are effective in
+predicting overall crime in London using machine learning models.
 
-Understanding the relationships between socio-economic factors and the spacio-temporal
-trends in crime rate in London is crucial for policymakers. This research provided valuable
-insights that can inform targeted interventions and policies aimed at reducing crime rates
-in specific London boroughs. Policymakers can use this information to allocate resources
-effectively and begin to address factors that influence crime, as well as providing
-prevention strategies at varying times of the year based on the temporal findings.
+**_Technologies:_** Python, scikit-learn, pandas, numpy, matplotlib, seaborn and Tableau.
 
-Limitations and Future Research
-While this study offers valuable insights, there were limitations particularly regarding data
-sources and the nature of reported crimes. The study aimed to explore various
-socio-economic factors influencing crime rates in London through the use of open source
-data. However, not all desired variables were available, leading to the use of substitutes
-that might not provide a comprehensive representation of the underlying dynamics. For
-instance, while median income was used as a substitute for income inequality, it may not
-capture the full spectrum of income disparities within boroughs. Another limitation in
-this project and crime analysis in general, is the issue of under reporting. Police data,
-which forms the basis of many crime analyses, often fails to capture the true extent of
-crime due to various factors. These factors include, poor police-community relationships,
-lack of confidence in the justice system and shame around reporting of certain crimes
-(Buil-Gil, Moretti and Langton, 2021).
+**_Method:_** Using open source data from the London Datastore I gathered Recorded Crime: Geographic Breakdown (csv) for 12 different crimes by London borough by mm/yyyy, The Land Area and Population Density, Ward and Borough (csv) for population density by London borough by mm/yyyy , The Employees Earning Below the London Living Wage (LLW) (xls) for % of people erning below the LLW by London borough by mm/yyyy, The Model Based Unemployment Estimates (xls) for uneployment rates by London borough by mm/yyyy, Earnings by Workplace, Borough (xls) for data on workplace based annual median earnings by London borough by mm/yyyy. 
 
-This research contributes to the understanding of crime trends in London, and provides a
-foundation for future investigations into the multifaceted relationship between
-socioeconomic factors and crime in London. However, the complex interplay of socioeconomic
-and cultural factors needs to be further explored to fully comprehend the evolving patterns
-of crime in London compared to other cities and countries. This could help to inform
-effective crime prevention and intervention strategies.
+These datasets were then checked, missing values were imputed or columns/rows dropped, duplicates were removed, column names were standardised, datasets were reshaped and merged by borough and date then aggregated by various combinations of borough, year, month etc for analysis. Feature engineering was conducted to gain crime rates by borough which took into consideration borough population size. Exploratory data analysis was conducted looking at descriptive statistics, visulisations including histograms, boxplots, heatmaps and scatterplots to observe distribution, outliers and correlations. Copies of the data were created with normalisation and without normalisation and with outliers included and with outliers (outliers appeared to be genuine high or low data crime rates) removed to observe the difference in model perfromances. Feature selection was used such as K Select best to observe which socio-economic factors were thought to be most important in predicting crime rates. 
 
-Future Improvements:
--Investigate the influence that socio-economic factors play on specific crime types by 
-borough to explore the differences in crime types.
--Explore additional socio-economic variables, such as education levels and income inequality,
-to further enhance understanding of crime trends in London.
--Employ and evalaute neural networks model in predicting crime in London.
+Data was then turned into an array using numpy, data was then split into 80% training data and 20% test data. Predictive models such as Random Forest Regressor and Support Vector Regression were used to try to predict crime rate in London using the socio-economic factors (multiple linear regression was also observed but not used as the assumptions were not met). Numerous model experimentations (hyperparameter tuning) and evaluations then took place on the training data using cross validation. The evaluation metrics used were MSE, MAE, RMSE, R2, MBD and a learning curve visualisation. The final models were then tested on the test data with the best performing model being the Random Forest Regressor on the data with outliers removed explaining 80.4% of variance in London crime rates. The hyperparameters were: n_estimators = 100, max_depth = 10, min_samples_leaf = 2, max_leaf_nodes = 10. Random Forest Regressors feature importance graph suggested that population density contributed the most to predicting Lodnon crime rate, followed by median income.
+
+**_Outcome:_** A 15,000 word academic journal article written in Latex for my MSc Data Science final project, I recieved a high distinction (76%).
+
+**_Improvements:_** Due to time contraints I was only able to look at overall crime rates in London but to further improve this project I would look at the influence that soci-economic factors play on specific crimes in London and I would try to find more open source socio-economic factor data measuring things like inequality and average household income. I also think it would be interesting to observe the effects of weather on crime rates. Furthermore, I would break up the code into different notebooks such as cleaning and processing, exploratory analysis, models etc rather than one long notebook of code to make it easier for others to read.
